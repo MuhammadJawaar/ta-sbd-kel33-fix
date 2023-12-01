@@ -22,6 +22,7 @@
                     <a class="text-white" href="/products">Beranda</a>
                     <a class="text-white" href="/products">Produk</a>
                     <a class="text-white" href="/categories">Kategori</a>
+                    <a class="text-white" href="/transaksi">transaksi</a>
                     <!-- Add more menu items if needed -->
                 </div>
             </div>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {    return redirect()->route('login');});
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -32,4 +33,14 @@ Route::group(['middleware' => 'auth.check'], function () {
     Route::post('/categories/{id}/softDelete', [CategoryController::class, 'softDelete'])->name('categories.softDelete');
     Route::get('/categories/trash', [CategoryController::class, 'trash'])->name('categories.trash');
     Route::post('/categories/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
+
+    Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transactions.index');
+    Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transactions.create');
+    Route::post('/transaksi/store', [TransaksiController::class, 'store'])->name('transactions.store');
+    Route::get('/transaksi/edit/{id}', [TransaksiController::class, 'edit'])->name('transactions.edit');
+    Route::put('/transaksi/update/{id}', [TransaksiController::class, 'update'])->name('transactions.update');
+    Route::delete('/transaksi/destroy/{id}', [TransaksiController::class, 'destroy'])->name('transactions.destroy');
+    Route::post('/transaksi/{id}/softDelete', [TransaksiController::class, 'softDelete'])->name('transactions.softDelete');
+    Route::get('/transaksi/trash', [TransaksiController::class, 'trash'])->name('transactions.trash');
+    Route::post('/transaksi/{id}/restore', [TransaksiController::class, 'restore'])->name('transactions.restore');
 });
