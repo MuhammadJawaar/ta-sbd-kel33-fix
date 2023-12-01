@@ -35,9 +35,17 @@
                     <td class="py-3 px-6">{{ $product->description ?? '-' }}</td>
                     <td class="py-3 px-6">{{ $product->stock ?? '-' }}</td>
                     <td class="py-3 px-6">{{ $product->category ?? '-' }}</td>
-                    <td class="py-3 px-6">
+                    <td class="py-3 px-6 flex items-center space-x-2">
                         <a href="{{ route('products.edit', $product->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                        <button onclick="confirmDelete({{ $product->id }})" class="text-red-500 hover:text-red-700 ml-2">Delete</button>
+
+                        <!-- Delete Form -->
+                        <form action="{{ route('products.destroy', $product->id) }}" method="post" class="inline-block">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')" class="text-red-500 hover:text-red-700">
+                                Delete
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -45,13 +53,4 @@
     </table>
 
     <!-- Konfirmasi Penghapusan menggunakan JavaScript -->
-    <script>
-        function confirmDelete(productId) {
-            var isConfirmed = confirm("Apakah Anda yakin ingin menghapus produk ini?");
-            if (isConfirmed) {
-                // Lakukan aksi penghapusan di sini
-                console.log("Produk dengan ID " + productId + " dihapus.");
-            }
-        }
-    </script>
 @endsection
