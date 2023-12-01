@@ -8,9 +8,6 @@
     <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
         Tambah Produk
     </a>
-    <a href="{{ route('categories.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Lihat Kategori
-    </a>
     <a href="{{ route('products.trash') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
         Tempat Sampah
     </a>
