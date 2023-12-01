@@ -11,9 +11,10 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = DB::select('SELECT * FROM categories');
+        $categories = DB::select("SELECT * FROM categories WHERE isDeleted = 0");
         return view('categories.index', compact('categories'));
     }
+    
 
     public function create()
     {
@@ -53,6 +54,31 @@ class CategoryController extends Controller
 
         return redirect()->route('categories.index')->with('success', 'kategori berhasil diperbarui.');
     }
+
+    public function destroy($id)
+    {
+        DB::delete("DELETE FROM categories WHERE id_kategori = :id_kategori", ['id_kategori' => $id]);
+
+        return redirect()->route('categories.index')->with('success', 'Kategori berhasil dihapus.');
+    }
+
+    public function softdelete($id)
+{
+    DB::update("UPDATE categories SET isDeleted = 1 WHERE id_kategori = :id_kategori", ['id_kategori' => $id]);
+    
+    return redirect()->route('categories.trash')->with('success', 'Kategori berhasil dihapus.');
+}
+
+public function restore($id)
+{
+    DB::update("UPDATE categories SET isDeleted = 0 WHERE id_kategori = :id_kategori", ['id_kategori' => $id]);
+    return redirect()->route('categories.index')->with('success', 'Kategori berhasil dipulihkan.');
+}
+public function trash()
+{
+    $categories = DB::select("SELECT * FROM categories WHERE isDeleted = 1");
+    return view('categories.trash', compact('categories'));
+}
 
 }
 

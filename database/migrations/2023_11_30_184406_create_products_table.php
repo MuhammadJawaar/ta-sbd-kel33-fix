@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
             $table->integer('stock')->nullable();
             $table->unsignedBigInteger('id_kategori')->nullable();
             $table->foreign('id_kategori')->references('id_kategori')->on('categories')->onDelete('set null');
+            $table->integer('isDeleted')->default(0);
             $table->timestamps();
         });
     }

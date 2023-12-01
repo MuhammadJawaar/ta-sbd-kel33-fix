@@ -11,6 +11,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id('id_kategori');
             $table->string('name');
+            $table->integer('isDeleted')->default(0);
             $table->timestamps();
         });
     }

@@ -4,15 +4,9 @@
 
 @section('content')
 <h1 class="text-2xl font-bold mb-4">Daftar Kategori</h1>
-<div class="flex space-x-8 mb-4">
-    <a href="{{ route('products.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Lihat Produk
-    </a>
-    <a href="{{ route('categories.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Tambah Kategori
-    </a>
-    <a href="{{ route('categories.trash') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Tempat Sampah
+<div class="mb-4">
+    <a href="{{ route('categories.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        Lihat Kategori
     </a>
 </div>
 <table class="min-w-full divide-y divide-gray-200">
@@ -31,8 +25,6 @@
             <td class="py-3 px-6">{{ $category->id_kategori }}</td>
             <td class="py-3 px-6">{{ $category->name }}</td>
             <td class="py-3 px-6">
-                <a href="{{ route('categories.edit', $category->id_kategori) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-                <!-- Delete Form -->
                 <form action="{{ route('categories.destroy', $category->id_kategori) }}" method="post" class="inline-block">
                     @csrf
                     @method('delete')
@@ -40,11 +32,11 @@
                         Delete
                     </button>
                 </form>
-                <!-- Soft Delete Form -->
-                <form action="{{ route('categories.softDelete', $category->id_kategori) }}" method="post" class="inline-block">
+                <!-- Restore Form -->
+                <form action="{{ route('categories.restore', $category->id_kategori) }}" method="post" class="inline-block">
                     @csrf
-                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')" class="text-red-500 hover:text-red-700">
-                        SoftDelete
+                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin memulihkan kategori ini?')" class="text-green-500 hover:text-green-700">
+                        Restore
                     </button>
                 </form>
             </td>

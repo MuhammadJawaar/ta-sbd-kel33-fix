@@ -5,14 +5,8 @@
 @section('content')
 <h1 class="text-2xl font-bold mb-4">Daftar Produk</h1>
 <div class="flex space-x-8 mb-4">
-    <a href="{{ route('products.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Tambah Produk
-    </a>
-    <a href="{{ route('categories.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Lihat Kategori
-    </a>
-    <a href="{{ route('products.trash') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Tempat Sampah
+    <a href="{{ route('products.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        Lihat Produk
     </a>
 </div>
 <table class="min-w-full divide-y divide-gray-200">
@@ -38,22 +32,19 @@
             <td class="py-3 px-6">{{ $product->description ?? '-' }}</td>
             <td class="py-3 px-6">{{ $product->stock ?? '-' }}</td>
             <td class="py-3 px-6">{{ $product->category ?? '-' }}</td>
-            <td class="py-3 px-6 flex items-center space-x-2">
-                <a href="{{ route('products.edit', $product->id) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
-
-                <!-- Delete Form -->
+            <td class="py-3 px-6">
                 <form action="{{ route('products.destroy', $product->id) }}" method="post" class="inline-block">
                     @csrf
                     @method('delete')
-                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')" class="text-red-500 hover:text-red-700">
+                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')" class="text-red-500 hover:text-red-700">
                         Delete
                     </button>
                 </form>
-                <!-- Soft Delete Form -->
-                <form action="{{ route('products.softDelete', $product->id) }}" method="post" class="inline-block">
+                <!-- Restore Form -->
+                <form action="{{ route('products.restore', $product->id) }}" method="post" class="inline-block">
                     @csrf
-                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')" class="text-red-500 hover:text-red-700">
-                        SoftDelete
+                    <button type="submit" onclick="return confirm('Apakah Anda yakin ingin memulihkan kategori ini?')" class="text-green-500 hover:text-green-700">
+                        Restore
                     </button>
                 </form>
             </td>
