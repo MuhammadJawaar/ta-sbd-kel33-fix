@@ -8,6 +8,9 @@
         <a href="{{ route('products.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             Lihat Produk
         </a>
+        <a href="{{ route('categories.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+            Tambah Kategori
+        </a>
     </div>
     <table class="min-w-full divide-y divide-gray-200">
         <!-- Tabel Header -->
@@ -15,6 +18,7 @@
             <tr>
                 <th class="py-3 px-6 text-left">ID Kategori</th>
                 <th class="py-3 px-6 text-left">Nama Kategori</th>
+                <th class="py-3 px-6 text-left">Aksi</th> <!-- Kolom Aksi -->
             </tr>
         </thead>
         <!-- Tabel Body -->
@@ -23,6 +27,10 @@
                 <tr>
                     <td class="py-3 px-6">{{ $category->id_kategori }}</td>
                     <td class="py-3 px-6">{{ $category->name }}</td>
+                    <td class="py-3 px-6">
+                        <a href="{{ route('categories.edit', $category->id_kategori) }}" class="text-blue-500 hover:text-blue-700">Edit</a>
+                        <button onclick="confirmDelete({{ $category->id_kategori }})" class="text-red-500 hover:text-red-700 ml-2">Delete</button>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
