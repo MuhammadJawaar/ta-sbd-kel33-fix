@@ -13,6 +13,9 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
+        if (session('user_id')){
+            return redirect('/home');
+        }
         return view('auth.login');
     }
 
@@ -20,6 +23,7 @@ class AuthController extends Controller
     {
         $nomerHandphone = $request->input('nomer_handphone');
         $password = $request->input('password');
+        
 
         // Debug: Tambahkan log informasi
         Log::info('Trying to log in with nomer_handphone: ' . $nomerHandphone);
@@ -36,7 +40,7 @@ class AuthController extends Controller
             // Otentikasi berhasil, simpan informasi pengguna dalam session
             session(['user_id' => $user[0]->id]);
 
-            return redirect('/products'); // Ganti dengan URL yang sesuai
+            return redirect('/home'); // Ganti dengan URL yang sesuai
         }
 
         // Debug: Tambahkan log informasi
@@ -44,6 +48,21 @@ class AuthController extends Controller
 
         // Otentikasi gagal
         return back()->withErrors(['nomer_handphone' => 'Invalid credentials']);
+    }
+
+    public function logout()
+    {
+        // Debug: Tambahkan log informasi
+        Log::info('Logging out user ID: ' . auth()->id());
+
+        // Logout pengguna
+        Auth::logout();
+
+        // Hapus data sesi pengguna
+        session()->forget('user_id');
+
+        // Redirect ke halaman login
+        return redirect('/login');
     }
 }
 

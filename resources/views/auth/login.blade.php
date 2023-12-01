@@ -13,9 +13,10 @@
 <body class="bg-gray-100">
 
 <div class="flex items-center justify-center h-screen">
+    
     <form action="{{ url('/login') }}" method="post" class="bg-white px-20 py-10 rounded shadow-md">
         @csrf
-
+        <h1 class="text-2xl font-bold mb-4 text-center">Toko Alat Tulis</h1>
         <div class="mb-4">
             <label for="nomer_handphone" class="block text-gray-700">Nomor Handphone:</label>
             <input type="text" name="nomer_handphone" class="mt-1 p-2 w-full border rounded" required>

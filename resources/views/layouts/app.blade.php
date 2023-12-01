@@ -19,10 +19,11 @@
                     </svg>
                 </button>
                 <div class="hidden lg:flex space-x-4">
-                    <a class="text-white" href="/products">Beranda</a>
+                    <a class="text-white" href="/home">Beranda</a>
                     <a class="text-white" href="/products">Produk</a>
                     <a class="text-white" href="/categories">Kategori</a>
                     <a class="text-white" href="/transaksi">transaksi</a>
+                    <a class="text-white" href="/logout">logout</a>
                     <!-- Add more menu items if needed -->
                 </div>
             </div>
