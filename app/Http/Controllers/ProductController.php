@@ -20,6 +20,7 @@ class ProductController extends Controller
                 categories.name as category
             FROM products
             LEFT JOIN categories ON products.id_kategori = categories.id_kategori
+            WHERE products.isDeleted = 0
         ");
 
         return view('products.index', compact('products'));
@@ -85,5 +86,25 @@ class ProductController extends Controller
         DB::delete("DELETE FROM products WHERE id = :id", ['id' => $id]);
 
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus.');
+    }
+
+    public function softdelete($id)
+    {
+        DB::update("UPDATE products SET isDeleted = 1 WHERE id = :id", ['id' => $id]);
+    
+        return redirect()->route('products.trash')->with('success', 'Produk berhasil dihapus.');
+    }
+    
+    public function restore($id)
+    {
+        DB::update("UPDATE products SET isDeleted = 0 WHERE id = :id", ['id' => $id]);
+    
+        return redirect()->route('products.index')->with('success', 'Produk berhasil dipulihkan.');
+    }
+    public function trash()
+    {
+        $products = DB::select("SELECT * FROM products WHERE isDeleted = 1");
+        
+    return view('products.trash', compact('products'));
     }
 }
