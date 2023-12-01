@@ -5,7 +5,7 @@
 @section('content')
 <h1 class="text-2xl font-bold mb-4">Daftar Produk</h1>
 <!-- Search Form -->
-<form action="{{ route('products.index') }}" method="GET" class="mb-4">
+<form action="{{ route('products.search') }}" method="GET" class="mb-4">
     <div class="flex space-x-2">
         <input type="text" name="search" placeholder="Search" class="border p-2">
         <button type="submit" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">

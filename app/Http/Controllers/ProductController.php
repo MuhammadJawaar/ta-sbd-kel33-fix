@@ -109,21 +109,38 @@ class ProductController extends Controller
     }
     public function search(Request $request)
 {
-    
-    $sql = "SELECT * FROM products WHERE isDeleted = 0";
+    // Base SQL query
+    $sql = "
+        SELECT products.*, categories.name as category
+        FROM products
+        INNER JOIN categories ON products.id_kategori = categories.id_kategori
+        WHERE products.isDeleted = 0
+    ";
 
     // Check if a search term is provided
     if ($request->has('search')) {
         $searchTerm = $request->input('search');
 
         // Append the search conditions to the SQL query
-        $sql .= " AND (name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%' OR category LIKE '%$searchTerm%')";
+        $sql .= "
+            AND (
+                products.name LIKE '%$searchTerm%'
+                OR products.description LIKE '%$searchTerm%'
+                OR categories.name LIKE '%$searchTerm%'
+            )
+        ";
     }
 
     // Execute the raw SQL query
-    $products = DB::select($sql);
+    $results = DB::select($sql);
+
+    // Transform the results into a collection of stdClass objects
+    $products = collect($results);
 
     return view('products.index', compact('products'));
 }
+
+
+    
 
 }

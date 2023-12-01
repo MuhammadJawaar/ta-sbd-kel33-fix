@@ -81,7 +81,6 @@ public function trash()
 }
 public function search(Request $request)
 {
-    
     $sql = "SELECT * FROM categories WHERE isDeleted = 0";
 
     // Check if a search term is provided
@@ -89,14 +88,15 @@ public function search(Request $request)
         $searchTerm = $request->input('search');
 
         // Append the search conditions to the SQL query
-        $sql .= " AND (name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%' OR category LIKE '%$searchTerm%')";
+        $sql .= " AND (name LIKE '%$searchTerm%')";
     }
 
     // Execute the raw SQL query
-    $products = DB::select($sql);
+    $categories = DB::select($sql);
 
-    return view('products.index', compact('products'));
+    return view('categories.index', compact('categories'));
 }
+
 
 }
 

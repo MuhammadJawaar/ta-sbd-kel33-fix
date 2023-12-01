@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth.check'], function () {
     Route::post('/products/{id}/softDelete', [ProductController::class, 'softDelete'])->name('products.softDelete');
     Route::get('/products/trash', [ProductController::class, 'trash'])->name('products.trash');
     Route::post('/products/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
-    Route::post('/products/search/', [ProductController::class, 'search'])->name('products.search');
+    Route::get('/products/search/', [ProductController::class, 'search'])->name('products.search');
 
 
 
@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth.check'], function () {
     Route::post('/categories/{id}/softDelete', [CategoryController::class, 'softDelete'])->name('categories.softDelete');
     Route::get('/categories/trash', [CategoryController::class, 'trash'])->name('categories.trash');
     Route::post('/categories/{id}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
+    Route::get('/categories/search/', [CategoryController::class, 'search'])->name('categories.search');
 
     Route::get('/transaksi', [TransaksiController::class, 'index'])->name('transactions.index');
     Route::get('/transaksi/create', [TransaksiController::class, 'create'])->name('transactions.create');
