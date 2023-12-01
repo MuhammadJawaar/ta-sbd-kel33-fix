@@ -107,4 +107,23 @@ class ProductController extends Controller
         
     return view('products.trash', compact('products'));
     }
+    public function search(Request $request)
+{
+    
+    $sql = "SELECT * FROM products WHERE isDeleted = 0";
+
+    // Check if a search term is provided
+    if ($request->has('search')) {
+        $searchTerm = $request->input('search');
+
+        // Append the search conditions to the SQL query
+        $sql .= " AND (name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%' OR category LIKE '%$searchTerm%')";
+    }
+
+    // Execute the raw SQL query
+    $products = DB::select($sql);
+
+    return view('products.index', compact('products'));
+}
+
 }

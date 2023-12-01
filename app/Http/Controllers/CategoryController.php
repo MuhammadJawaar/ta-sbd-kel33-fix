@@ -79,6 +79,24 @@ public function trash()
     $categories = DB::select("SELECT * FROM categories WHERE isDeleted = 1");
     return view('categories.trash', compact('categories'));
 }
+public function search(Request $request)
+{
+    
+    $sql = "SELECT * FROM categories WHERE isDeleted = 0";
+
+    // Check if a search term is provided
+    if ($request->has('search')) {
+        $searchTerm = $request->input('search');
+
+        // Append the search conditions to the SQL query
+        $sql .= " AND (name LIKE '%$searchTerm%' OR description LIKE '%$searchTerm%' OR category LIKE '%$searchTerm%')";
+    }
+
+    // Execute the raw SQL query
+    $products = DB::select($sql);
+
+    return view('products.index', compact('products'));
+}
 
 }
 
