@@ -5,9 +5,6 @@
 @section('content')
 <h1 class="text-2xl font-bold mb-4">Daftar Kategori</h1>
 <div class="flex space-x-8 mb-4">
-    <a href="{{ route('products.index') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-        Lihat Produk
-    </a>
     <a href="{{ route('categories.create') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
         Tambah Kategori
     </a>
