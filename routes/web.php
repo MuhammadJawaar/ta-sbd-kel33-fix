@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth.check'], function () {
     Route::post('/products/{id}/softDelete', [ProductController::class, 'softDelete'])->name('products.softDelete');
     Route::get('/products/trash', [ProductController::class, 'trash'])->name('products.trash');
     Route::post('/products/{id}/restore', [ProductController::class, 'restore'])->name('products.restore');
+    Route::post('/products/search/', [ProductController::class, 'search'])->name('products.search');
+
 
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
